@@ -19,7 +19,7 @@ const homeRouter = require('./routes/home');
 const logoutRouter = require('./routes/logout');
 const profileRouter = require('./routes/profile');
 const db = require('./models/');
-const opt = require('./config/passportdb.json');
+const passportDBConfig = require('./config/passportDB');
 
 app.use(express.static('public'));
 app.use(morgan('dev'));
@@ -35,9 +35,13 @@ app.engine('handlebars', expressHandleBars({
 app.set('view engine', 'handlebars');
 app.use(express.static('public'));
 
-const conf = require('./config/config.json');
+let sessionStore = null;
 
-const sessionStore = new MySQLStore(opt.optionsProd);
+if (app.settings.env === 'production') {
+  sessionStore = new MySQLStore(passportDBConfig.optionsProd);
+} else {
+  sessionStore = new MySQLStore(passportDBConfig.optionsDev);
+}
 
 app.use(session({
   secret: 'qazwsxedc',
