@@ -37,7 +37,7 @@ app.use(express.static('public'));
 
 let sessionStore = null;
 
-if (app.settings.env === 'production') {
+if (process.env.NODE_ENV === 'production') {
   sessionStore = new MySQLStore(passportDBConfig.optionsProd);
 } else {
   sessionStore = new MySQLStore(passportDBConfig.optionsDev);
