@@ -84,6 +84,7 @@ passport.use(new LocalStrategy(
     });
   }));
 
+app.get('/favicon.ico', (req, res) => res.status(204));
 
 app.get('/robots.txt', function (req, res) {
   res.type('text/plain');
