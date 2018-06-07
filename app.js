@@ -35,7 +35,9 @@ app.engine('handlebars', expressHandleBars({
 app.set('view engine', 'handlebars');
 app.use(express.static('public'));
 
-const sessionStore = new MySQLStore(opt.options);
+const conf = require('./config/config.json');
+
+const sessionStore = new MySQLStore(opt.optionsProd);
 
 app.use(session({
   secret: 'qazwsxedc',
