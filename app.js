@@ -84,8 +84,6 @@ passport.use(new LocalStrategy(
     });
   }));
 
-app.get('/favicon.ico', (req, res) => res.sendStatus(204));
-
 app.get('/robots.txt', function (req, res) {
   res.type('text/plain');
   res.send("User-agent: *\nDisallow: /");
