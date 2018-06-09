@@ -1,8 +1,20 @@
-
-<div class="container">
-  {{#if errors}} {{#each errors}}
-  <div class="alert alert-danger"> {{this.msg}} </div>
-  {{/each}} {{/if}}
+<div class="container flash-msgs">
+  <div class="row error-messages">
+    {{#showErrors}}
+    <ul class="col-6 offset-2 no-bullets">
+      {{#errors}}
+      <li>
+        <div class="alert alert-danger alert-dismissible fade show offset-md-4" role="alert">
+          <strong id="error-msg">{{.}}</strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </li>
+      {{/errors}}
+    </ul>
+    {{/showErrors}}
+  </div>
 </div>
 
 <div class="login-main">
@@ -26,7 +38,7 @@
             <div class="form-group login-form-group login-form-group-password">
               <input id="registration-confpass" name="confirmPassword" type="password" class="form-control" placeholder="Confirm Password">
             </div>
-            <button id="login-form" name="login" type="submit" class="btn btn-success login-button">
+            <button id="login-form" name="login" type="submit" class="btn btn-lg btn-success login-button">
               <i class="fas fa-sign-in-alt"></i>Register</button>
           </form>
         </div>
@@ -47,6 +59,31 @@
     console.log(registrationForm.email.value);
     console.log(registrationForm.password.value);
     console.log(registrationForm.confirmPassword.value);
+
+    if (! registrationForm.username.value || 
+            ! registrationForm.email.value ||
+              ! registrationForm.password.value || 
+                ! registrationForm.confirmPassword.value) {
+
+      $('.error-messages').html(`
+      <div class="alert alert-danger alert-dismissible fade show offset-md-4" role="alert">
+        <strong id="error-msg">All fields are mandatory</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>`);              
+    } 
+
+    if (!(registrationForm.password.value === registrationForm.confirmPassword.value)) {
+      $('.error-messages').html(`
+        <div class="alert alert-danger alert-dismissible fade show offset-md-4" role="alert">
+        <strong id="error-msg">Password and Confirm Password do not match</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>`);
+    }
+
     if (registrationForm.username.value
           && registrationForm.email.value
             && registrationForm.password.value

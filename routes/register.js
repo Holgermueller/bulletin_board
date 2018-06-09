@@ -37,9 +37,19 @@ router.post('/', (req, res, next) => {
         res.redirect('/login');
       });
     }).catch((err) => {
-      res.status(500).render('register', {
-        title: 'Something went wrong',
-      });
+      console.log("user already exists");
+      console.log(err.name);
+      if (err.name ==='SequelizeUniqueConstraintError') {
+        res.status(500).render('register', {
+          showErrors: true,
+          errors: ['User already exists with this email']
+        });
+      } else {
+        res.status(500).render('register', {
+          showErrors: true,
+          errors: ['Something went wrong, try again or contact support']
+        });
+      }
     });
   }
 });

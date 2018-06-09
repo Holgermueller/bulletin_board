@@ -10,6 +10,8 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const MySQLStore = require('express-mysql-session');
 const bcrypt = require('bcryptjs');
+const flash = require('express-flash-messages');
+const debug = require('debug');
 
 // Routes
 const postsRouter = require('./routes/posts');
@@ -52,7 +54,10 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
 
+
+//Routing based on paths
 app.use('/', homeRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
@@ -74,10 +79,14 @@ passport.use(new LocalStrategy(
           if (res === true) {
             return done(null, user);
           }
-          return done(null, false);
+          return done(null, false, {
+            message: 'Username or Password Invalid'
+          });
         });
       } else {
-        return done(null, false);
+        return done(null, false, {
+          message: 'Username or Password Invalid'
+        });
       }
     }).catch((err) => {
       done(err);
@@ -86,7 +95,7 @@ passport.use(new LocalStrategy(
 
 app.get('/robots.txt', function (req, res) {
   res.type('text/plain');
-  res.send("User-agent: *\nDisallow: /");
+  res.status(404).send("User-agent: *\nDisallow: /");
 });
 
 app.use((req, res, next) => {
@@ -106,8 +115,9 @@ app.use((error, req, res) => {
 
 function authenticationMiddleware() {
   return (req, res, next) => {
-    console.log(`req.session.passport.user: ${JSON.stringify(req.session.passport)}`);
+    debug(`req.session.passport.user: ${JSON.stringify(req.session.passport)}`);
     if (req.isAuthenticated()) return next();
+    req.flash('error', 'You need to be logged in to view this page');
     res.redirect('/login');
   };
 }

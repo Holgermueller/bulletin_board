@@ -16,9 +16,6 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-  console.log(req.body.title);
-  console.log(req.body.description);
-  console.log(req.user.username);
   db.Post.create({
     title: req.body.title,
     description: req.body.description,
@@ -52,7 +49,7 @@ router.delete('/:id', (req, res) => {
         res.status(500).send("Deletion Failed");
       });
     } else {
-      res.status(403).send("Deletion Failed");
+      res.status(403).send("You are not authorized to delete this post");
     }
   }).catch((err) => {
     res.status(500).json("Deletion failed");

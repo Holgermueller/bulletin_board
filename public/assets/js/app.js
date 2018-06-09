@@ -7,9 +7,9 @@ $(document).ready(function(){
       $.ajax({
         method: "DELETE",
         url: "/posts/" + id
-      }).then((res)=> {
+      }).then((res) => {
         location.reload()
-      });
+      }).catch((err) => {});
     }
   });
-})
+});
