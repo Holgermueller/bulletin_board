@@ -36,7 +36,7 @@ router.get('/delete', (req, res) => {
   }).then(function (result) {
     res.status(200).redirect('/logout');
   }).catch((error)=> {
-    console.log(error);
+    debug(error);
     res.status(500).redirect('/profile');
   })
 });

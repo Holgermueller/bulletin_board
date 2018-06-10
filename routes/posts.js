@@ -38,7 +38,6 @@ router.delete('/:id', (req, res) => {
     }
   }).then((post) => {
     if (post.email === email) {
-      console.log("in deletion");
       db.Post.destroy({
         where: {
           id: id

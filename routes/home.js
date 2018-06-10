@@ -1,9 +1,10 @@
 const express = require('express');
+const debug = require('debug');
 
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
-  console.log(req.isAuthenticated());
+  debug(req.isAuthenticated());
   res.render('home');
 });
 
