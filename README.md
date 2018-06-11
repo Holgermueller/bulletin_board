@@ -33,7 +33,7 @@ Jatin needs a plumber.
 
 **How to run Tests**
 
-#npm run watch# to start the application
-#npm run cypress:open# to launch test window
+use command ***npm run watch*** to start the application,
+and ***npm run cypress:open*** to launch test window
 ![alt text](/projectdocs/images/tests.png "Tests Screen")
 
