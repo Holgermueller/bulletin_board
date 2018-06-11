@@ -22,6 +22,8 @@ router.post('/', (req, res, next) => {
     email: req.user.email,
     name: req.user.username,
   }).then(post => {
+    console.log("***************");
+    console.log("in posts");
     res.redirect('/posts');
   }).catch((err) => {
     res.redirect('/posts');

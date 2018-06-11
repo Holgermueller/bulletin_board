@@ -32,14 +32,14 @@
       <div class="modal-body">
         <form id="my-post-form" method="POST" action="/posts">
           <div class="form-group name">
-            <input name="title" type="text" class="form-control" maxlength="30" placeholder="Enter Title">
+            <input id="title" name="title" type="text" class="form-control" maxlength="30" placeholder="Enter Title">
           </div>
           <div class="form-group name">
-            <input name="description" type="text" class="form-control" maxlength="100" placeholder="Enter Description">
+            <input id="description" name="description" type="text" class="form-control" maxlength="100" placeholder="Enter Description">
           </div>    
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Confirm</button>
+            <button id="close" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button id="submit-post" type="submit" class="btn btn-primary">Confirm</button>
           </div>
         </form>
       </div>
