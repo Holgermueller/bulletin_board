@@ -12,6 +12,7 @@ const MySQLStore = require('express-mysql-session');
 const bcrypt = require('bcryptjs');
 const flash = require('express-flash-messages');
 const debug = require('debug');
+const config = require('config');
 
 // Routes
 const postsRouter = require('./routes/posts');
@@ -38,6 +39,8 @@ app.set('view engine', 'handlebars');
 app.use(express.static('public'));
 
 let sessionStore = null;
+
+console.log(config.util.getEnv('NODE_ENV'));
 
 if (process.env.NODE_ENV === 'production') {
   sessionStore = new MySQLStore(passportDBConfig.optionsProd);
