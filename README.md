@@ -30,3 +30,10 @@ Jatin needs a plumber.
 **Posts Page**
 
 ![alt text](/projectdocs/images/postsPage.png "Posts Page")
+
+**How to run Tests**
+
+#npm run watch# to start the application
+#npm run cypress:open# to launch test window
+![alt text](/projectdocs/images/tests.png "Tests Screen")
+
