@@ -3,7 +3,7 @@ module.exports = {
     "host": "localhost",
     "port": 3306,
     "user": "root",
-    "password": "loremipsum",
+    "password": "hello123",
     "database": "bulletin_board"
   },
   "optionsProd": {
