@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "hello123",
+    "password": "loremipsum",
     "database": "bulletin_board",
     "host": "localhost",
     "dialect": "mysql",
